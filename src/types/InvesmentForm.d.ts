@@ -10,6 +10,8 @@ interface UserInput {
 
 interface InvensmentFormProps {
   setYearlyData: React.Dispatch<React.SetStateAction<YearlyDataArray>>;
+  setUserInput: React.Dispatch<React.SetStateAction<UserInput>>;
+  userInput: UserInput;
 }
 
 export { InvensmentFormProps, UserInput };

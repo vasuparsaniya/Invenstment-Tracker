@@ -1,34 +1,40 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
-import '../assets/css/InvensmentForm.css';
-import { InvensmentFormProps, UserInput } from '../types/InvensmentForm';
+import React, { ChangeEvent, FormEvent } from 'react';
+import '../assets/css/InvesmentForm.css';
+import { InvensmentFormProps } from '../types/InvesmentForm';
+import { USER_INPUT } from '../constant/InvestmentForm';
 
-function InvensmentForm({ setYearlyData }: InvensmentFormProps) {
-  const [userInput, setUserInput] = useState<UserInput>({} as UserInput);
-
-  const handleCurrentSaving = (event: ChangeEvent<HTMLInputElement>) => {
-    setUserInput((prev) => {
-      return { ...prev, currentSavings: event.target.value };
-    });
+function InvenstmentForm({
+  setYearlyData,
+  setUserInput,
+  userInput,
+}: InvensmentFormProps) {
+  const handleUserInput = (
+    identifier: USER_INPUT,
+    event: ChangeEvent<HTMLInputElement>,
+  ) => {
+    switch (identifier) {
+      case USER_INPUT.CURRENT_SAVING:
+        setUserInput((prev) => {
+          return { ...prev, currentSavings: event.target.value };
+        });
+        break;
+      case USER_INPUT.YEAR_SAVING:
+        setUserInput((prev) => {
+          return { ...prev, yearlyContribution: event.target.value };
+        });
+        break;
+      case USER_INPUT.EXPECTEDINTEREST:
+        setUserInput((prev) => {
+          return { ...prev, expectedReturn: event.target.value };
+        });
+        break;
+      case USER_INPUT.DURATION:
+        setUserInput((prev) => {
+          return { ...prev, duration: event.target.value };
+        });
+        break;
+    }
   };
-
-  const handleYearSaving = (event: ChangeEvent<HTMLInputElement>) => {
-    setUserInput((prev) => {
-      return { ...prev, yearlyContribution: event.target.value };
-    });
-  };
-
-  const handleExpectedInterest = (event: ChangeEvent<HTMLInputElement>) => {
-    setUserInput((prev) => {
-      return { ...prev, expectedReturn: event.target.value };
-    });
-  };
-
-  const handleInvenstmentDuration = (event: ChangeEvent<HTMLInputElement>) => {
-    setUserInput((prev) => {
-      return { ...prev, duration: event.target.value };
-    });
-  };
-
   const calculateHandler = (event: FormEvent<HTMLFormElement>) => {
     // Should be triggered when form is submitted
     // You might not directly want to bind it to the submit event on the form though...
@@ -79,7 +85,7 @@ function InvensmentForm({ setYearlyData }: InvensmentFormProps) {
             type="number"
             id="current-savings"
             value={userInput.currentSavings}
-            onChange={handleCurrentSaving}
+            onChange={(e) => handleUserInput(USER_INPUT.CURRENT_SAVING, e)}
           />
         </p>
         <p>
@@ -88,7 +94,7 @@ function InvensmentForm({ setYearlyData }: InvensmentFormProps) {
             type="number"
             id="yearly-contribution"
             value={userInput.yearlyContribution}
-            onChange={handleYearSaving}
+            onChange={(e) => handleUserInput(USER_INPUT.YEAR_SAVING, e)}
           />
         </p>
       </div>
@@ -99,7 +105,7 @@ function InvensmentForm({ setYearlyData }: InvensmentFormProps) {
             type="number"
             id="expected-return"
             value={userInput.expectedReturn}
-            onChange={handleExpectedInterest}
+            onChange={(e) => handleUserInput(USER_INPUT.EXPECTEDINTEREST, e)}
           />
         </p>
         <p>
@@ -108,7 +114,7 @@ function InvensmentForm({ setYearlyData }: InvensmentFormProps) {
             type="number"
             id="duration"
             value={userInput.duration}
-            onChange={handleInvenstmentDuration}
+            onChange={(e) => handleUserInput(USER_INPUT.DURATION, e)}
           />
         </p>
       </div>
@@ -124,4 +130,4 @@ function InvensmentForm({ setYearlyData }: InvensmentFormProps) {
   );
 }
 
-export default InvensmentForm;
+export default InvenstmentForm;

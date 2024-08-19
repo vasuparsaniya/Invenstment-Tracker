@@ -1,8 +1,14 @@
 import React from 'react';
-import '../assets/css/InvenstmentTable.css';
+import '../assets/css/InvestmentTable.css';
 import { YearlyDataArray } from '../types/App';
 
-const InvenstmentTable = ({ yearlyData }: { yearlyData: YearlyDataArray }) => {
+const InvenstmentTable = ({
+  yearlyData,
+  initialInvenstment,
+}: {
+  yearlyData: YearlyDataArray;
+  initialInvenstment: number;
+}) => {
   return (
     <table className="result">
       <thead>
@@ -21,8 +27,16 @@ const InvenstmentTable = ({ yearlyData }: { yearlyData: YearlyDataArray }) => {
               <td>{item.year}</td>
               <td>{item.savingsEndOfYear}</td>
               <td>{item.yearlyInterest}</td>
-              <td>{item.yearlyContribution}</td>
-              <td>TOTAL INVESTED CAPITAL</td>
+              <td>
+                {item.savingsEndOfYear -
+                  initialInvenstment -
+                  item.yearlyContribution * item.year}
+              </td>{' '}
+              //total interest gained
+              <td>
+                {initialInvenstment + item.yearlyContribution * item.year}
+              </td>{' '}
+              //total invested capital
             </tr>
           );
         })}

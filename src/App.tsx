@@ -2,18 +2,27 @@ import React, { useState } from 'react';
 import './assets/css/App.css';
 import { YearlyDataArray } from './types/App';
 import Header from './components/Header';
-import InvensmentForm from './components/InvensmentForm';
-import InvenstmentTable from './components/InvensmentTable';
+import InvenstmentTable from './components/InvesmentTable';
+import InvenstmentForm from './components/InvesmentForm';
+import { UserInput } from './types/InvesmentForm';
 
 function App() {
   const [yearlyData, setYearlyData] = useState<YearlyDataArray>([]);
+  const [userInput, setUserInput] = useState<UserInput>({} as UserInput);
 
   return (
     <div>
       <Header />
-      <InvensmentForm setYearlyData={setYearlyData} />
+      <InvenstmentForm
+        setYearlyData={setYearlyData}
+        setUserInput={setUserInput}
+        userInput={userInput}
+      />
       {yearlyData.length ? (
-        <InvenstmentTable yearlyData={yearlyData} />
+        <InvenstmentTable
+          yearlyData={yearlyData}
+          initialInvenstment={Number(userInput.currentSavings)}
+        />
       ) : (
         <p className="nodatatext">No invensment calculate yet....</p>
       )}
