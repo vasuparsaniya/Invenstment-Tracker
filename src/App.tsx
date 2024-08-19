@@ -1,24 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './assets/css/App.css';
+import { YearlyDataArray } from './types/App';
+import Header from './components/Header';
+import InvensmentForm from './components/InvensmentForm';
+import InvenstmentTable from './components/InvensmentTable';
 
 function App() {
+  const [yearlyData, setYearlyData] = useState<YearlyDataArray>([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <InvensmentForm setYearlyData={setYearlyData} />
+      {yearlyData.length ? (
+        <InvenstmentTable yearlyData={yearlyData} />
+      ) : (
+        <p className="nodatatext">No invensment calculate yet....</p>
+      )}
     </div>
   );
 }

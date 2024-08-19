@@ -4,9 +4,6 @@ import tseslintPlugin from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import pluginReact from "eslint-plugin-react";
 
-const temp = {
-}
-
 export default [
   {
     files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],

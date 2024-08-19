@@ -1,0 +1,23 @@
+{
+  // "editor.formatOnSave": true,
+  // "editor.formatOnType": true,
+  // "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // "prettier.bracketSameLine": false,
+  // "prettier.semi": true,
+  // "prettier.useTabs": false,
+  // "prettier.tabWidth": 2,
+  // "prettier.singleQuote": true,
+  // "editor.codeActionsOnSave": {
+  //   "source.fixAll.eslint": "explicit"
+  // },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "css.lint.unknownAtRules": "ignore",
+  "files.associations": {
+    "*.css": "tailwindcss" //tell VS code to always open .css files in Tailwind mode
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  }
+}
