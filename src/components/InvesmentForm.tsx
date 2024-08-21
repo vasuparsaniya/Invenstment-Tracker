@@ -50,18 +50,21 @@ function InvenstmentForm({
     // The below code calculates yearly results (total savings, interest etc)
     for (let i = 0; i < duration; i++) {
       const yearlyInterest = currentSavings * expectedReturn;
-      currentSavings += yearlyInterest + yearlyContribution;
+      const savingsEndOfYear =
+        currentSavings + yearlyInterest + yearlyContribution;
+
       setYearlyData((prev) => {
         return [
           ...prev,
           {
             year: i + 1,
             yearlyInterest: yearlyInterest,
-            savingsEndOfYear: currentSavings,
+            savingsEndOfYear: savingsEndOfYear,
             yearlyContribution: yearlyContribution,
           },
         ];
       });
+      currentSavings = savingsEndOfYear; // Update currentSavings for the next iteration
     }
     // do something with yearlyData ...
   };

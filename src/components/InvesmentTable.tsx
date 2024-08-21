@@ -2,6 +2,19 @@ import React from 'react';
 import '../assets/css/InvestmentTable.css';
 import { YearlyDataArray } from '../types/App';
 
+/**total interest gained ==> {item.savingsEndOfYear -
+                  initialInvenstment -
+                  item.yearlyContribution * item.year}*/
+
+// total invested capital {initialInvenstment + item.yearlyContribution * item.year}
+
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+
 const InvenstmentTable = ({
   yearlyData,
   initialInvenstment,
@@ -25,18 +38,20 @@ const InvenstmentTable = ({
           return (
             <tr key={index}>
               <td>{item.year}</td>
-              <td>{item.savingsEndOfYear}</td>
-              <td>{item.yearlyInterest}</td>
+              <td>{formatter.format(item.savingsEndOfYear)}</td>
+              <td>{formatter.format(item.yearlyInterest)}</td>
               <td>
-                {item.savingsEndOfYear -
-                  initialInvenstment -
-                  item.yearlyContribution * item.year}
+                {formatter.format(
+                  item.savingsEndOfYear -
+                    initialInvenstment -
+                    item.yearlyContribution * item.year,
+                )}
               </td>{' '}
-              //total interest gained
               <td>
-                {initialInvenstment + item.yearlyContribution * item.year}
+                {formatter.format(
+                  initialInvenstment + item.yearlyContribution * item.year,
+                )}
               </td>{' '}
-              //total invested capital
             </tr>
           );
         })}
